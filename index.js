@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 app.get("/job-sources", async (req, res) => {
   const jobSources = await JobSource.find();
- 
+
   res.status(200).json(jobSources);
 });
 app.listen(port, () => {
