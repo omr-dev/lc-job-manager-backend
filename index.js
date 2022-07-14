@@ -28,6 +28,9 @@ app.get("/job-sources", async (req, res) => {
 
   res.status(200).json(jobSources);
 });
+app.post("/login", (req, res) => {
+  res.send({ userName: "max", uid: 1 });
+});
 app.listen(port, () => {
   console.log(`Server runs on: http://localhost:${port}`);
 });
