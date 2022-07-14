@@ -17,6 +17,7 @@ mongoose.connect(MONGODB_URI, (err) => {
 });
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 const port = process.env.PORT || 3001;
 
@@ -29,8 +30,22 @@ app.get("/job-sources", async (req, res) => {
   res.status(200).json(jobSources);
 });
 app.post("/login", (req, res) => {
-  res.send({ userName: "max", uid: 1 });
+  const username = req.body.username;
+  const password = req.body.password;
+  if (checkLogin(username, password)) {
+    res.status(200).json({ username: "max", uid: 1 });
+  } else {
+    res.sendStatus(500);
+  }
 });
 app.listen(port, () => {
   console.log(`Server runs on: http://localhost:${port}`);
 });
+
+function checkLogin(username, password) {
+  if (username === "max" && password === "123") {
+    return true;
+  } else {
+    return false;
+  }
+}
